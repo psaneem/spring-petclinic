@@ -30,7 +30,14 @@ stages {
                 sh 'mvn package'
             }
         }
-
+        post { 
+        success { 
+            junit 'target/surefire-reports/**/*.xml"
+        }
+    }
         
     }
+        
+        
+        
 }
