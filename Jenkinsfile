@@ -1,32 +1,36 @@
 pipeline {
-    agent {
-            label 'pat'
+
+agent { node { label 'pat' } }
+tools {
+        maven 'maven' 
+        jdk 'JDK'
     }
-    tools{
-        maven 'mymaven'
-        jdk 'java'
-    }
-    stages {
-        stage('validate') {
+stages {
+    stage('Run in parallel') {
+     parallel {
+        stage('Code validate') {
             steps {
                 sh 'mvn validate'
             }
         }
-        stage('compile') {
+        stage('Code Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-        stage('test') {
+     }
+    }
+        stage('Code Test') {
             steps {
                 sh 'mvn test'
             }
         }
-         stage('package') {
+        stage('Code Package') {
             steps {
                 sh 'mvn package'
             }
         }
 
+        
     }
 }
