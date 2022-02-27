@@ -31,9 +31,9 @@ stages {
             }
         }
         post { 
-        success { 
-            junit 'target/surefire-reports/**/*.xml"
-        }
+           success { 
+            junit 'target/surefire-reports/**/*.xml'
+          }
     }
         
     }
